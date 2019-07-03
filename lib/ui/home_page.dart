@@ -127,8 +127,10 @@ class _HomePageState extends State<HomePage> {
                   default:
                     if (snapshot.hasError) {
                       return Container(
-                        child: Text("Deu Erro"),
-                      );
+                          child: Text(
+                        "Deu Erro",
+                        style: TextStyle(color: Colors.white),
+                      ));
                     } else
                       return _createGifTable(context, snapshot);
                 }
