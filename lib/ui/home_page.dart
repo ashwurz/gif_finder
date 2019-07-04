@@ -20,6 +20,12 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
+  void connectionRetry() {
+    setState(() {
+      build(context);
+    });
+  }
+
   Widget _createGifTable(BuildContext context, AsyncSnapshot snapshot) {
     return GridView.builder(
       padding: EdgeInsets.all(10.0),
@@ -126,11 +132,36 @@ class _HomePageState extends State<HomePage> {
                     );
                   default:
                     if (snapshot.hasError) {
-                      return Container(
-                          child: Text(
-                        "Deu Erro",
-                        style: TextStyle(color: Colors.white),
-                      ));
+                      return Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Icon(
+                              Icons.error,
+                              color: Colors.red,
+                              size: 150.0,
+                            ),
+                            Text(
+                              "Algo de errado aconteceu...",
+                              style: TextStyle(color: Colors.white),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.all(10.0),
+                              child: Container(
+                                height: 50.0,
+                                child: RaisedButton(
+                                  child: Text(
+                                    "Tentar Reconexão",
+                                    style: TextStyle(color: Colors.black),
+                                  ),
+                                  color: Colors.white,
+                                  onPressed: connectionRetry,
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                      );
                     } else
                       return _createGifTable(context, snapshot);
                 }
