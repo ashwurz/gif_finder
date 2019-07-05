@@ -54,8 +54,7 @@ class _HomePageState extends State<HomePage> {
                           GifPage(snapshot.data["data"][index])));
             },
             onLongPress: () {
-              Share.share(snapshot.data["data"][index]["images"]["fixed_height"]
-                  ["url"]);
+              Share.share(snapshot.data["data"][index]["images"]["fixed_height"]["url"]);
             },
           );
         } else {
