@@ -3,6 +3,7 @@ import 'dart:convert';
 
 class ApiConnection{
   String _urlTopTrendings = "https://api.giphy.com/v1/gifs/trending?api_key=tECttXGsMUUWLberQO6okKw8jglO9TQk&limit=20&rating=G";
+  String searchLanguage = "en";
   String searchString;
   int offset = 0;
 
@@ -18,6 +19,6 @@ class ApiConnection{
   }
 
   String _getSearchString(String searchString, int offset){
-    return "https://api.giphy.com/v1/gifs/search?api_key=tECttXGsMUUWLberQO6okKw8jglO9TQk&q=$searchString&limit=19&offset=$offset&rating=G&lang=en";
+    return "https://api.giphy.com/v1/gifs/search?api_key=tECttXGsMUUWLberQO6okKw8jglO9TQk&q=$searchString&limit=19&offset=$offset&rating=G&lang=$searchLanguage";
   }
 }

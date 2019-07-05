@@ -11,6 +11,8 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   ApiConnection connection = ApiConnection();
+  String _labelText = "Pesquise Aqui";
+  String _dropDownValue = "pt";
 
   int _getCount(List data) {
     if (connection.searchString == null || connection.searchString.isEmpty) {
@@ -92,7 +94,33 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: Colors.black,
         title: Image.network(
             "https://developers.giphy.com/static/img/dev-logo-lg.7404c00322a8.gif"),
-        centerTitle: true,
+        centerTitle: false,
+        actions: <Widget>[
+          Center(
+            child: DropdownButton<String>(
+              value: _dropDownValue,
+              style: TextStyle(color: Colors.white, fontSize: 18.0),
+              onChanged: (String newValue) {
+                setState(() {
+                  if (newValue == "en") {
+                    _labelText = "Search Here";
+                  } else {
+                    _labelText = "Pesquise Aqui";
+                  }
+                  _dropDownValue = newValue;
+                  connection.searchLanguage = newValue;
+                });
+              },
+              items: <String>['en', 'pt']
+                  .map<DropdownMenuItem<String>>((String value) {
+                return DropdownMenuItem<String>(
+                  value: value,
+                  child: Text(value),
+                );
+              }).toList(),
+            ),
+          ),
+        ],
       ),
       backgroundColor: Colors.black,
       body: Column(
@@ -101,7 +129,7 @@ class _HomePageState extends State<HomePage> {
             padding: EdgeInsets.all(10.0),
             child: TextField(
               decoration: InputDecoration(
-                  labelText: "Pesquise Aqui",
+                  labelText: _labelText,
                   labelStyle: TextStyle(color: Colors.white),
                   border: OutlineInputBorder()),
               style: TextStyle(color: Colors.white, fontSize: 18.0),
